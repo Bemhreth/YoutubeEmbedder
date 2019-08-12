@@ -33,10 +33,18 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" tools:ignore="MissingConstraints"
             android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="28dp">
             <ImageView
                 android:src="@android:drawable/presence_video_busy"
                 android:layout_width="wrap_content"
@@ -74,7 +82,7 @@
         <FrameLayout
             android:id="@+id/youtubeListContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="263dp"/>
 
     </LinearLayout>
 

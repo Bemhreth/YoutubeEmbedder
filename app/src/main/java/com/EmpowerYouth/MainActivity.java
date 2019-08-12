@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     TextView t1;
     TextView t2;
     TextView t3;
+
     TextView t4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         t1 = findViewById(R.id.textView5);
         t2 = findViewById(R.id.textView6);
         t3 = findViewById(R.id.textView7);
-//        t4 = findViewById(R.id.textView8);
+        t4 = findViewById(R.id.textView);
         Control control = new Control();
 
         control.maincontrol(I1,I2,t1,t2,t3,t4,this);
