@@ -22,6 +22,7 @@
         <!--android:id="@+id/youtube_player_view"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"/>-->
+
         <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
             android:id="@+id/youtube_player_view"
             android:layout_width="match_parent"
@@ -33,6 +34,14 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0" tools:ignore="MissingConstraints"
             android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -74,7 +83,7 @@
         <FrameLayout
             android:id="@+id/youtubeListContainer"
             android:layout_width="match_parent"
-            android:layout_height="263dp"/>
+            android:layout_height="477dp"/>
 
     </LinearLayout>
 

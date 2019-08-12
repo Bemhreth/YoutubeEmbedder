@@ -63,8 +63,8 @@ public class Control {
                     Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
                     t3.setText(model.getDislikes());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
-//                    t4.setText(model.getDescription());
-//                    Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
+                t4.setText(model.getTitle());
+                    Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
 
                 } catch (JSONException e) {
                     Map<String, String> errorList = new HashMap<>();
