@@ -5,21 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.EmpowerYouth.adapter.YoutubeListAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListBlankFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListBlankFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.LinkedList;
+
 public class ListBlankFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +26,9 @@ public class ListBlankFragment extends Fragment {
     private String youtubeVideoLink;
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView youtubeVideosRV;
+    private YoutubeListAdapter youtubeVideosAdapter;
 
     public ListBlankFragment() {
         // Required empty public constructor
@@ -64,8 +64,19 @@ public class ListBlankFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_blank, container, false);
 
-        TextView textView = view.findViewById(R.id.youtube_link);
-        textView.setText(youtubeVideoLink);
+        final LinkedList<String> videoLinkList = new LinkedList<>();
+        for (int i = 0; i < 6; i++) {
+            videoLinkList.addLast("Word " + i);
+        }
+
+//        TextView textView = view.findViewById(R.id.youtube_link);
+//        textView.setText(youtubeVideoLink);
+        youtubeVideosRV = view.findViewById(R.id.youtube_list);
+        youtubeVideosAdapter = new YoutubeListAdapter(getContext(), videoLinkList);
+
+
+        youtubeVideosRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        youtubeVideosRV.setAdapter(youtubeVideosAdapter);
 
         return view;
     }
