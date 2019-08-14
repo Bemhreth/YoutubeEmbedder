@@ -25,9 +25,9 @@ import java.util.Map;
 public class Control {
 
 
-    YoutubeConfig youtubeconfig = new YoutubeConfig();
-    RequestQueue request1,request2;
-    final Model model =new Model();
+//    YoutubeConfig youtubeconfig = new YoutubeConfig();
+//
+//    final Model model =new Model();
     ArrayList<Model> list=new ArrayList<>();
 
     public void setContext(Context context) {
@@ -40,9 +40,63 @@ public class Control {
     }
 
 
+    ImageView i1;
+    ImageView i2;
+     TextView t1;
+     TextView t2;
+     TextView t3;
 
+    public ImageView getI1() {
+        return i1;
+    }
 
-    public void maincontrol(ImageView i1, ImageView i2, final TextView t1, final TextView t2, final TextView t3, final TextView t4) {
+    public void setI1(ImageView i1) {
+        this.i1 = i1;
+    }
+
+    public ImageView getI2() {
+        return i2;
+    }
+
+    public void setI2(ImageView i2) {
+        this.i2 = i2;
+    }
+
+    public TextView getT1() {
+        return t1;
+    }
+
+    public void setT1(TextView t1) {
+        this.t1 = t1;
+    }
+
+    public TextView getT2() {
+        return t2;
+    }
+
+    public void setT2(TextView t2) {
+        this.t2 = t2;
+    }
+
+    public TextView getT3() {
+        return t3;
+    }
+
+    public void setT3(TextView t3) {
+        this.t3 = t3;
+    }
+
+    public TextView getT4() {
+        return t4;
+    }
+
+    public void setT4(TextView t4) {
+        this.t4 = t4;
+    }
+
+    TextView t4;
+
+    public ArrayList<Model> maincontrol() {
         // Toast.makeText(context,"the method is called",Toast.LENGTH_LONG).show();
         final ArrayList<Model>    li=new ArrayList<>();
         YoutubeConfig youtubeconfig = new YoutubeConfig();
@@ -50,8 +104,9 @@ public class Control {
         final Model model =new Model();
         request1 = Volley.newRequestQueue(getContext());
 
-//        Toast.makeText(getContext(), (CharSequence) getContext(),Toast.LENGTH_LONG).show();
 
+//        Toast.makeText(getContext(), (CharSequence) getContext(),Toast.LENGTH_LONG).show();
+        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
         StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -75,13 +130,13 @@ public class Control {
                     Toast.makeText(getContext(),model.getTitle(),Toast.LENGTH_LONG).show();
 
                     //li.add(Model);
-                    t1.setText(model.getViewed());
+                    getT1().setText(model.getViewed());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getLikes());
-                    t2.setText(model.getLikes());
+                    getT2().setText(model.getLikes());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
-                    t3.setText(model.getDislikes());
+                    getT3().setText(model.getDislikes());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
-                    t4.setText(model.getTitle());
+                    getT4().setText(model.getTitle());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
 
                 } catch (JSONException e) {
@@ -113,35 +168,30 @@ public class Control {
 
         request1.add(stringRequest);
 
-
-
-
-
-}
-public ArrayList<Model> play_list(RecyclerView rv, YoutubeListAdapter yla){
+       // RecyclerView rv, YoutubeListAdapter yla
         Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
-    request2 = Volley.newRequestQueue(this.getContext());
+        request2 = Volley.newRequestQueue(this.getContext());
+        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+request2);
+        StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-    StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
+                try {
 
-            try {
+                    JSONArray object = new JSONObject(response).getJSONArray("items");
+                    for(int i=0 ;i<object.length();i++) {
 
-                JSONArray object = new JSONObject(response).getJSONArray("items");
-                for(int i=0 ;i<object.length();i++) {
+                        model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
 
-                    model.setTitle(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
+                        model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
 
-                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
+                        Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
+                        list.add(model);
+                    }
 
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getImage_link());
-                    list.add(model);
-                }
-
-                Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
-                Log.d("this_is_unuque_because:" ,"-->"+model.getImage_link());
-                //li.add(Model);
+                    Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
+                   // Log.d("this_is_unuque_because1:" ,"-->"+model.getVideo_title());
+                    //li.add(Model);
 //                t1.setText(model.getViewed());
 //                Log.d("this_is_unuque_because:" ,"-->"+model.getLikes());
 //                t2.setText(model.getLikes());
@@ -151,15 +201,15 @@ public ArrayList<Model> play_list(RecyclerView rv, YoutubeListAdapter yla){
 //                t4.setText(model.getTitle());
 //                Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
 
-            } catch (JSONException e) {
-                Map<String, String> errorList = new HashMap<>();
-                errorList.put("message", "Error Parsing Response contact developer");
+                } catch (JSONException e) {
+                    Map<String, String> errorList = new HashMap<>();
+                    errorList.put("message", "Error Parsing Response contact developer");
 
+                }
             }
-        }
-    },new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 //                if (error.networkResponse.statusCode == 404 || error.networkResponse.statusCode == 422) {
 //                    Map<String, String> errorList = new HashMap<>();
 //                    errorList.put("message", "No result found");
@@ -170,18 +220,21 @@ public ArrayList<Model> play_list(RecyclerView rv, YoutubeListAdapter yla){
 //
 //                }
 //                Log.d("hhhh", error.getMessage());
-        }
-    }) {
+            }
+        }) {
 
 
 
 
-    };
+        };
 
-    request2.add(stringRequest2);
+        request2.add(stringRequest2);
 
-    return list;
 
+
+        //Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
+        return list;
 }
+
 }
 

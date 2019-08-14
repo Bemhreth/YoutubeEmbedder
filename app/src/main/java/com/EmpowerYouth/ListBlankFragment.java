@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.EmpowerYouth.adapter.YoutubeListAdapter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ListBlankFragment extends Fragment {
@@ -63,9 +65,13 @@ public class ListBlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_blank, container, false);
+         Control control = new Control();
+        ArrayList<Model> list;
 
+//         list=control.maincontrol();
         final LinkedList<String> videoLinkList = new LinkedList<>();
         for (int i = 0; i < 6; i++) {
+  //          Log.d("this_is_me",list.get(i).getVideo_title());
             videoLinkList.addLast("Word " + i);
         }
 

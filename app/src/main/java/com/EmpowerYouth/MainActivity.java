@@ -81,8 +81,15 @@ public class MainActivity extends AppCompatActivity {
         t3 = findViewById(R.id.textView7);
         t4 = findViewById(R.id.textView);
         Control control = new Control();
+        //control.setContext2(this);
           control.setContext(this);
-        control.maincontrol(I1,I2,t1,t2,t3,t4);
+          control.setI1(I1);
+        control.setI2(I2);
+        control.setT1(t1);
+        control.setT2(t2);
+        control.setT3(t3);
+        control.setT4(t4);
+        control.maincontrol();
         getLifecycle().addObserver(youTubePlayerView);
         //view();
         youTubePlayerView.addYouTubePlayerListener(new YouTubePlayerListener() {
