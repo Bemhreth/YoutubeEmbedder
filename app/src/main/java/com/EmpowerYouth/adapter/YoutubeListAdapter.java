@@ -10,15 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.EmpowerYouth.Control;
+import com.EmpowerYouth.Model;
 import com.EmpowerYouth.R;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.YoutubeListViewHolder> {
 
     private LinkedList<String> youtubeVidList= new LinkedList<>();
     private LayoutInflater layoutInflater;
+    Control con=new Control();
 
+    ArrayList<Model>    list=new ArrayList<>();
     public YoutubeListAdapter(Context context,
                               LinkedList<String> videoLinkList) {
         layoutInflater = LayoutInflater.from(context);

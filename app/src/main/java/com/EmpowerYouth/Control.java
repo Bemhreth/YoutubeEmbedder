@@ -6,6 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.EmpowerYouth.adapter.YoutubeListAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -22,16 +25,31 @@ import java.util.Map;
 public class Control {
 
 
+    YoutubeConfig youtubeconfig = new YoutubeConfig();
+    RequestQueue request1,request2;
+    final Model model =new Model();
+    ArrayList<Model> list=new ArrayList<>();
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    Context context;
+    public Context getContext() {
+        return this.context;
+    }
 
 
 
-    public void maincontrol(ImageView i1, ImageView i2, final TextView t1, final TextView t2, final TextView t3, final TextView t4, final Context context) {
+
+    public void maincontrol(ImageView i1, ImageView i2, final TextView t1, final TextView t2, final TextView t3, final TextView t4) {
         // Toast.makeText(context,"the method is called",Toast.LENGTH_LONG).show();
         final ArrayList<Model>    li=new ArrayList<>();
         YoutubeConfig youtubeconfig = new YoutubeConfig();
-        RequestQueue request1;
+        RequestQueue request1,request2;
         final Model model =new Model();
-        request1 = Volley.newRequestQueue(context);
+        request1 = Volley.newRequestQueue(getContext());
+
 //        Toast.makeText(getContext(), (CharSequence) getContext(),Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
@@ -54,7 +72,7 @@ public class Control {
                     model.setTitle(object.getJSONObject(0).getJSONObject("snippet").getString("title"));
 
                     model.setDescription(object.getJSONObject(0).getJSONObject("snippet").getString("description"));
-                    Toast.makeText(context,model.getTitle(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),model.getTitle(),Toast.LENGTH_LONG).show();
 
                     //li.add(Model);
                     t1.setText(model.getViewed());
@@ -63,7 +81,7 @@ public class Control {
                     Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
                     t3.setText(model.getDislikes());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
-                t4.setText(model.getTitle());
+                    t4.setText(model.getTitle());
                     Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
 
                 } catch (JSONException e) {
@@ -97,7 +115,73 @@ public class Control {
 
 
 
-    }
 
+
+}
+public ArrayList<Model> play_list(RecyclerView rv, YoutubeListAdapter yla){
+        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
+    request2 = Volley.newRequestQueue(this.getContext());
+
+    StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+
+            try {
+
+                JSONArray object = new JSONObject(response).getJSONArray("items");
+                for(int i=0 ;i<object.length();i++) {
+
+                    model.setTitle(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
+
+                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
+
+                    Log.d("this_is_unuque_because:" ,"-->"+model.getImage_link());
+                    list.add(model);
+                }
+
+                Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
+                Log.d("this_is_unuque_because:" ,"-->"+model.getImage_link());
+                //li.add(Model);
+//                t1.setText(model.getViewed());
+//                Log.d("this_is_unuque_because:" ,"-->"+model.getLikes());
+//                t2.setText(model.getLikes());
+//                Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
+//                t3.setText(model.getDislikes());
+//                Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
+//                t4.setText(model.getTitle());
+//                Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
+
+            } catch (JSONException e) {
+                Map<String, String> errorList = new HashMap<>();
+                errorList.put("message", "Error Parsing Response contact developer");
+
+            }
+        }
+    },new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+//                if (error.networkResponse.statusCode == 404 || error.networkResponse.statusCode == 422) {
+//                    Map<String, String> errorList = new HashMap<>();
+//                    errorList.put("message", "No result found");
+//
+//                } else {
+//                    Map<String, String> errorList = new HashMap<>();
+//                    errorList.put("message", "Network error please check your internet connection");
+//
+//                }
+//                Log.d("hhhh", error.getMessage());
+        }
+    }) {
+
+
+
+
+    };
+
+    request2.add(stringRequest2);
+
+    return list;
+
+}
 }
 

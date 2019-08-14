@@ -27,45 +27,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:videoId="qkSBmRAVXNc"
+            android:layout_weight="1"
             app:autoPlay="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:showFullScreenButton="true"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" tools:ignore="MissingConstraints"
-            android:layout_weight="1"/>
+            app:videoId="qkSBmRAVXNc"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TextView" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="28dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <ImageView
-                android:src="@android:drawable/presence_video_busy"
+                android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/imageView5" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="TODO"
+                android:src="@android:drawable/presence_video_busy" />
+
             <TextView
+                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView5" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <ImageView
-                android:src="@android:drawable/btn_star_big_on"
+                android:id="@+id/imageView6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/imageView6" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="TODO"
+                android:src="@android:drawable/btn_star_big_on" />
+
             <TextView
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView6" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <ImageView
-                android:src="@android:drawable/btn_star_big_off"
+                android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/imageView7" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="TODO"
+                android:src="@android:drawable/btn_star_big_off" />
+
             <TextView
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView7" android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
         <!--<fragment android:name="com.example.android.fragments.HeadlinesFragment"-->
         <!--android:id="@+id/headlines_fragment"-->
@@ -82,7 +105,7 @@
         <FrameLayout
             android:id="@+id/youtubeListContainer"
             android:layout_width="match_parent"
-            android:layout_height="263dp"/>
+            android:layout_height="600dp" />
 
     </LinearLayout>
 

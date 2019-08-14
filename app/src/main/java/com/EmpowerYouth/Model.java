@@ -4,6 +4,10 @@ public class Model {
     private String viewed;
     private String title;
     private String description;
+    private String likes;
+    private String dislikes;
+    private String Image_link;
+    private String Video_title;
 
     public String getTitle() {
         return title;
@@ -45,7 +49,22 @@ public class Model {
         this.dislikes = dislikes;
     }
 
-    private String likes;
-    private String dislikes;
+
+
+    public String getImage_link() {
+        return Image_link;
+    }
+
+    public void setImage_link(String image_link) {
+        Image_link = image_link;
+    }
+
+    public String getVideo_title() {
+        return Video_title;
+    }
+
+    public void setVideo_title(String video_title) {
+        Video_title = video_title;
+    }
 }
 
