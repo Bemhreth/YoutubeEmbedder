@@ -4,6 +4,7 @@ import com.EmpowerYouth.*;
 import android.app.Dialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
@@ -20,6 +21,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstan
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import java.util.Map;
 //import org.jetbrains.annotations.NotNull;
 //import com.google.android.youtube.player.YouTubePlayerView;
 //import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -80,16 +83,29 @@ public class MainActivity extends AppCompatActivity {
         t2 = findViewById(R.id.textView6);
         t3 = findViewById(R.id.textView7);
         t4 = findViewById(R.id.textView);
-        Control control = new Control();
+        final Control control = new Control();
         //control.setContext2(this);
           control.setContext(this);
-          control.setI1(I1);
-        control.setI2(I2);
-        control.setT1(t1);
-        control.setT2(t2);
-        control.setT3(t3);
-        control.setT4(t4);
-        control.maincontrol();
+
+        control.maincontrol(new VolleyCallback() {
+            @Override
+            public void onSuccess() {
+                t1.setText(control.model.getViewed());
+                Log.d("this_is_unuque_because:" ,"-->"+control.model.getLikes());
+                t2.setText(control.model.getLikes());
+                Log.d("this_is_unuque_because:" ,"-->"+control.model.getDislikes());
+                t3.setText(control.model.getDislikes());
+                Log.d("this_is_unuque_because:" ,"-->"+control.model.getTitle());
+                t4.setText(control.model.getTitle());
+                Log.d("this_is_unuque_because:" ,"-->"+control.model.getDescription());
+            }
+
+            @Override
+            public void onError(TYPE type, Map<String, String> errorList) {
+
+            }
+        });
+        //control.maincontrol();
         getLifecycle().addObserver(youTubePlayerView);
         //view();
         youTubePlayerView.addYouTubePlayerListener(new YouTubePlayerListener() {
@@ -194,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
     }
+
 }
 
 

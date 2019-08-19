@@ -40,68 +40,68 @@ public class Control {
     }
 
 
-    ImageView i1;
-    ImageView i2;
-     TextView t1;
-     TextView t2;
-     TextView t3;
-
-    public ImageView getI1() {
-        return i1;
-    }
-
-    public void setI1(ImageView i1) {
-        this.i1 = i1;
-    }
-
-    public ImageView getI2() {
-        return i2;
-    }
-
-    public void setI2(ImageView i2) {
-        this.i2 = i2;
-    }
-
-    public TextView getT1() {
-        return t1;
-    }
-
-    public void setT1(TextView t1) {
-        this.t1 = t1;
-    }
-
-    public TextView getT2() {
-        return t2;
-    }
-
-    public void setT2(TextView t2) {
-        this.t2 = t2;
-    }
-
-    public TextView getT3() {
-        return t3;
-    }
-
-    public void setT3(TextView t3) {
-        this.t3 = t3;
-    }
-
-    public TextView getT4() {
-        return t4;
-    }
-
-    public void setT4(TextView t4) {
-        this.t4 = t4;
-    }
-
-    TextView t4;
-
-    public ArrayList<Model> maincontrol() {
+//    ImageView i1;
+//    ImageView i2;
+//     TextView t1;
+//     TextView t2;
+//     TextView t3;
+//
+//    public ImageView getI1() {
+//        return i1;
+//    }
+//
+//    public void setI1(ImageView i1) {
+//        this.i1 = i1;
+//    }
+//
+//    public ImageView getI2() {
+//        return i2;
+//    }
+//
+//    public void setI2(ImageView i2) {
+//        this.i2 = i2;
+//    }
+//
+//    public TextView getT1() {
+//        return t1;
+//    }
+//
+//    public void setT1(TextView t1) {
+//        this.t1 = t1;
+//    }
+//
+//    public TextView getT2() {
+//        return t2;
+//    }
+//
+//    public void setT2(TextView t2) {
+//        this.t2 = t2;
+//    }
+//
+//    public TextView getT3() {
+//        return t3;
+//    }
+//
+//    public void setT3(TextView t3) {
+//        this.t3 = t3;
+//    }
+//
+//    public TextView getT4() {
+//        return t4;
+//    }
+//
+//    public void setT4(TextView t4) {
+//        this.t4 = t4;
+//    }
+//
+//    TextView t4;
+    final Model model =new Model();
+    public ArrayList<Model> maincontrol(final VolleyCallback callback) {
         // Toast.makeText(context,"the method is called",Toast.LENGTH_LONG).show();
         final ArrayList<Model>    li=new ArrayList<>();
         YoutubeConfig youtubeconfig = new YoutubeConfig();
         RequestQueue request1,request2;
-        final Model model =new Model();
+
         request1 = Volley.newRequestQueue(getContext());
 
 
@@ -130,19 +130,13 @@ public class Control {
                     Toast.makeText(getContext(),model.getTitle(),Toast.LENGTH_LONG).show();
 
                     //li.add(Model);
-                    getT1().setText(model.getViewed());
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getLikes());
-                    getT2().setText(model.getLikes());
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
-                    getT3().setText(model.getDislikes());
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
-                    getT4().setText(model.getTitle());
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
+
+                    callback.onSuccess();
 
                 } catch (JSONException e) {
                     Map<String, String> errorList = new HashMap<>();
                     errorList.put("message", "Error Parsing Response contact developer");
-
+                    callback.onError(VolleyCallback.TYPE.JSON_ERROR,errorList);
                 }
             }
         },new Response.ErrorListener() {
@@ -189,6 +183,7 @@ public class Control {
                         list.add(model);
                     }
 
+
                     Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
                    // Log.d("this_is_unuque_because1:" ,"-->"+model.getVideo_title());
                     //li.add(Model);
@@ -231,8 +226,9 @@ public class Control {
         request2.add(stringRequest2);
 
 
-
-        //Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
+//        ListBlankFragment fragment1 = new ListBlankFragment();
+//        fragment1.setList1(list);
+//        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
         return list;
 }
 
