@@ -21,23 +21,18 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     private LinkedList<String> youtubeVidList= new LinkedList<>();
     private LayoutInflater layoutInflater;
-    Control con=new Control();
 
-    ArrayList<Model>    list=new ArrayList<>();
+
+    ArrayList<Model>   videoLinkList;
     public YoutubeListAdapter(Context context,
-                              LinkedList<String> videoLinkList) {
-        layoutInflater = LayoutInflater.from(context);
-        //this.youtubeVidList = videoLinkList;
-        for (int i = 0; i < 6; i++) {
-            youtubeVidList.addLast("Word " + i);
-
-        }
+                              ArrayList<Model> videoLinkList) {
+        this.videoLinkList=videoLinkList;
     }
 
     @NonNull
     @Override
     public YoutubeListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.youtube_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.youtube_item, parent, false);
         return new YoutubeListViewHolder(itemView, this);
     }
 

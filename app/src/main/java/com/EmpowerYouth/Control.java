@@ -30,28 +30,28 @@ public class Control {
     final Model model =new Model();
     ArrayList<Model> list=new ArrayList<>();
 
-    public void setContext(Context context) {
+    public Control(Context context) {
         this.context = context;
     }
 
+
+
     Context context;
-    public Context getContext() {
-        return this.context;
-    }
 
 
 
-    public ArrayList<Model> maincontrol(final VolleyCallback callback) {
+
+    public void maincontrol(final VolleyCallback callback) {
         // Toast.makeText(context,"the method is called",Toast.LENGTH_LONG).show();
         final ArrayList<Model>    li=new ArrayList<>();
         YoutubeConfig youtubeconfig = new YoutubeConfig();
         RequestQueue request1,request2;
 
-        request1 = Volley.newRequestQueue(getContext());
+        request1 = Volley.newRequestQueue(context);
 
 
 
-        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
+        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+context);
         StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -68,7 +68,7 @@ public class Control {
                     model.setTitle(object.getJSONObject(0).getJSONObject("snippet").getString("title"));
 
                     model.setDescription(object.getJSONObject(0).getJSONObject("snippet").getString("description"));
-                    Toast.makeText(getContext(),model.getTitle(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,model.getTitle(),Toast.LENGTH_LONG).show();
 
 
 
@@ -94,56 +94,60 @@ public class Control {
 
         request1.add(stringRequest);
 
-       // RecyclerView rv, YoutubeListAdapter yla
-        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
-        request2 = Volley.newRequestQueue(this.getContext());
-        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+request2);
-        StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
 
-                try {
+}
+public ArrayList<Model> vid_list(final VolleyCallback callback){
+        RequestQueue request2;
 
-                    JSONArray object = new JSONObject(response).getJSONArray("items");
-                    for(int i=0 ;i<object.length();i++) {
+    Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+context);
+    request2 = Volley.newRequestQueue(context);
+    Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+request2);
+    StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
 
-                        model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
+            try {
 
-                        model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
+                JSONArray object = new JSONObject(response).getJSONArray("items");
+                for(int i=0 ;i<object.length();i++) {
 
-                        Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
-                        list.add(model);
-                    }
+                    model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
 
+                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
 
-                    Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
-
-
-                } catch (JSONException e) {
-                    Map<String, String> errorList = new HashMap<>();
-                    errorList.put("message", "Error Parsing Response contact developer");
-
+                    Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
+                    list.add(model);
                 }
+
+                callback.onSuccess();
+                Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
+
+
+            } catch (JSONException e) {
+                Map<String, String> errorList = new HashMap<>();
+                errorList.put("message", "Error Parsing Response contact developer");
+
             }
-        },new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        }
+    },new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
 //
-            }
-        }) {
+        }
+    }) {
 
 
 
 
-        };
+    };
 
-        request2.add(stringRequest2);
+    request2.add(stringRequest2);
 
 
 //        ListBlankFragment fragment1 = new ListBlankFragment();
 //        fragment1.setList1(list);
 //        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
-        return list;
+    return list;
 }
 
 }

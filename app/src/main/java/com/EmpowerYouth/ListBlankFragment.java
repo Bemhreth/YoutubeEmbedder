@@ -18,6 +18,7 @@ import com.EmpowerYouth.adapter.YoutubeListAdapter;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class ListBlankFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -55,6 +56,7 @@ public class ListBlankFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             youtubeVideoLink = getArguments().getString(ARG_PARAM1);
         }
@@ -65,7 +67,7 @@ public class ListBlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_blank, container, false);
-         Control control = new Control();
+         Control control = new Control(getActivity());
         ArrayList<Model> list;
 
 //         list=control.maincontrol();
@@ -78,12 +80,23 @@ public class ListBlankFragment extends Fragment {
 //        TextView textView = view.findViewById(R.id.youtube_link);
 //        textView.setText(youtubeVideoLink);
         youtubeVideosRV = view.findViewById(R.id.youtube_list);
-        youtubeVideosAdapter = new YoutubeListAdapter(getContext(), videoLinkList);
+//        youtubeVideosAdapter = new YoutubeListAdapter(getContext(), videoLinkList);
 
 
         youtubeVideosRV.setLayoutManager(new LinearLayoutManager(getContext()));
         youtubeVideosRV.setAdapter(youtubeVideosAdapter);
+      final Control control1 = new Control(getActivity());
+      control1.vid_list(new VolleyCallback() {
+          @Override
+          public void onSuccess() {
+              YoutubeListAdapter list = new YoutubeListAdapter(getContext(),control1.list);
+          }
 
+          @Override
+          public void onError(TYPE type, Map<String, String> errorList) {
+
+          }
+      });
         return view;
     }
 

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG = "IFramePreview";
-    Control control1 = new Control();
+    Control control1 = new Control(this);
     public void view(){
 
         //ArrayList<Model> ob=control1.maincontrol();
@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         t2 = findViewById(R.id.textView6);
         t3 = findViewById(R.id.textView7);
         t4 = findViewById(R.id.textView);
-        final Control control = new Control();
+        final Control control = new Control(this);
         //control.setContext2(this);
-          control.setContext(this);
+
 
         control.maincontrol(new VolleyCallback() {
             @Override
