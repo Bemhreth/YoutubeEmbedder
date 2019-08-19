@@ -25,9 +25,9 @@ import java.util.Map;
 public class Control {
 
 
-//    YoutubeConfig youtubeconfig = new YoutubeConfig();
-//
-//    final Model model =new Model();
+    YoutubeConfig youtubeconfig = new YoutubeConfig();
+
+    final Model model =new Model();
     ArrayList<Model> list=new ArrayList<>();
 
     public void setContext(Context context) {
@@ -40,62 +40,7 @@ public class Control {
     }
 
 
-//    ImageView i1;
-//    ImageView i2;
-//     TextView t1;
-//     TextView t2;
-//     TextView t3;
-//
-//    public ImageView getI1() {
-//        return i1;
-//    }
-//
-//    public void setI1(ImageView i1) {
-//        this.i1 = i1;
-//    }
-//
-//    public ImageView getI2() {
-//        return i2;
-//    }
-//
-//    public void setI2(ImageView i2) {
-//        this.i2 = i2;
-//    }
-//
-//    public TextView getT1() {
-//        return t1;
-//    }
-//
-//    public void setT1(TextView t1) {
-//        this.t1 = t1;
-//    }
-//
-//    public TextView getT2() {
-//        return t2;
-//    }
-//
-//    public void setT2(TextView t2) {
-//        this.t2 = t2;
-//    }
-//
-//    public TextView getT3() {
-//        return t3;
-//    }
-//
-//    public void setT3(TextView t3) {
-//        this.t3 = t3;
-//    }
-//
-//    public TextView getT4() {
-//        return t4;
-//    }
-//
-//    public void setT4(TextView t4) {
-//        this.t4 = t4;
-//    }
-//
-//    TextView t4;
-    final Model model =new Model();
+
     public ArrayList<Model> maincontrol(final VolleyCallback callback) {
         // Toast.makeText(context,"the method is called",Toast.LENGTH_LONG).show();
         final ArrayList<Model>    li=new ArrayList<>();
@@ -105,7 +50,7 @@ public class Control {
         request1 = Volley.newRequestQueue(getContext());
 
 
-//        Toast.makeText(getContext(), (CharSequence) getContext(),Toast.LENGTH_LONG).show();
+
         Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
         StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
             @Override
@@ -113,10 +58,6 @@ public class Control {
 
                 try {
                     JSONArray object = new JSONObject(response).getJSONArray("items");
-                    //Toast.makeText(context,object.toString(),Toast.LENGTH_LONG).show();
-                    // Log.d("object things",object.toString());
-
-                    //JSONObject organizationDetail = new JSONObject(response).getJSONObject("statistics");
 
                     model.setViewed(object.getJSONObject(0).getJSONObject("statistics").getString("viewCount"));
                     Log.d("object things",object.getJSONObject(0).getJSONObject("statistics").getString("viewCount"));
@@ -129,7 +70,7 @@ public class Control {
                     model.setDescription(object.getJSONObject(0).getJSONObject("snippet").getString("description"));
                     Toast.makeText(getContext(),model.getTitle(),Toast.LENGTH_LONG).show();
 
-                    //li.add(Model);
+
 
                     callback.onSuccess();
 
@@ -142,16 +83,7 @@ public class Control {
         },new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                if (error.networkResponse.statusCode == 404 || error.networkResponse.statusCode == 422) {
-//                    Map<String, String> errorList = new HashMap<>();
-//                    errorList.put("message", "No result found");
 //
-//                } else {
-//                    Map<String, String> errorList = new HashMap<>();
-//                    errorList.put("message", "Network error please check your internet connection");
-//
-//                }
-//                Log.d("hhhh", error.getMessage());
             }
         }) {
 
@@ -185,16 +117,7 @@ public class Control {
 
 
                     Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
-                   // Log.d("this_is_unuque_because1:" ,"-->"+model.getVideo_title());
-                    //li.add(Model);
-//                t1.setText(model.getViewed());
-//                Log.d("this_is_unuque_because:" ,"-->"+model.getLikes());
-//                t2.setText(model.getLikes());
-//                Log.d("this_is_unuque_because:" ,"-->"+model.getDislikes());
-//                t3.setText(model.getDislikes());
-//                Log.d("this_is_unuque_because:" ,"-->"+model.getTitle());
-//                t4.setText(model.getTitle());
-//                Log.d("this_is_unuque_because:" ,"-->"+model.getDescription());
+
 
                 } catch (JSONException e) {
                     Map<String, String> errorList = new HashMap<>();
@@ -205,16 +128,7 @@ public class Control {
         },new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                if (error.networkResponse.statusCode == 404 || error.networkResponse.statusCode == 422) {
-//                    Map<String, String> errorList = new HashMap<>();
-//                    errorList.put("message", "No result found");
 //
-//                } else {
-//                    Map<String, String> errorList = new HashMap<>();
-//                    errorList.put("message", "Network error please check your internet connection");
-//
-//                }
-//                Log.d("hhhh", error.getMessage());
             }
         }) {
 
