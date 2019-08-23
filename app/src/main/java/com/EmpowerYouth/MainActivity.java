@@ -29,34 +29,18 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private YouTubePlayerView playerView;
     private static final String TAG = "IFramePreview";
     Control control1 = new Control(this);
-    public void view(){
-
-        //ArrayList<Model> ob=control1.maincontrol();
-        //Toast.makeText(this,ob.get(0).getViewed(),Toast.LENGTH_LONG).show();
-
-//        t1.setText(ob.get(0).getViewed());
-//        Log.d("this_is_unuque_because:" ,"-->"+ob.get(0).getLikes());
-//        t2.setText(ob.get(0).getLikes());
-//        Log.d("this_is_unuque_because:" ,"-->"+ob.get(0).getDislikes());
-//        t3.setText(ob.get(0).getTitle());
-//        Log.d("this_is_unuque_because:" ,"-->"+ob.get(0).getTitle());
-//        t4.setText(ob.get(0).getDescription());
-//        Log.d("this_is_unuque_because:" ,"-->"+ob.get(0).getDescription());
-    }
-
-
-    //Object ob=new Object();
 
 
 
-    private YouTubePlayerView playerView;
+
+
     /** Fullscreen functionality **/
 
-    private boolean fullscreenEnabled = false;
-    private Dialog mFullscreenDialog;
+    private boolean fullscreenEnabled = true;
+
     ImageView I1;
     ImageView I2;
     ImageView I3;
@@ -191,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @Override
     public void onDestroy() {

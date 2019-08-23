@@ -33,6 +33,14 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:showFullScreenButton="true"
+            app:enableAutomaticInitialization="true"
+            app:useWebUi="true"
+            app:handleNetworkEvents="true"
+            app:showSeekBar="true"
+            app:showVideoCurrentTime="true"
+            app:showVideoDuration="true"
+            app:showYouTubeButton="true"
+
             app:videoId="qkSBmRAVXNc"
             tools:ignore="MissingConstraints" />
 

@@ -27,7 +27,7 @@ public class Control {
 
     YoutubeConfig youtubeconfig = new YoutubeConfig();
 
-    final Model model =new Model();
+     Model model;
     ArrayList<Model> list=new ArrayList<>();
 
     public Control(Context context) {
@@ -57,6 +57,7 @@ public class Control {
             public void onResponse(String response) {
 
                 try {
+                    model=new Model();
                     JSONArray object = new JSONObject(response).getJSONArray("items");
 
                     model.setViewed(object.getJSONObject(0).getJSONObject("statistics").getString("viewCount"));
@@ -108,17 +109,21 @@ public ArrayList<Model> vid_list(final VolleyCallback callback){
 
             try {
 
+
                 JSONArray object = new JSONObject(response).getJSONArray("items");
                 for(int i=0 ;i<object.length();i++) {
+                    model=new Model();
 
-                    model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
+                   model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
 
-                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("default").getString("url"));
+                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
 
                     Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
-                    list.add(model);
+                    list.add(i,model);
                 }
-
+for (int i =0;i<list.size();i++){
+    Log.d("listt",list.get(i).getVideo_title()+"\n"+list.get(i).getImage_link());
+}
                 callback.onSuccess();
                 Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
 

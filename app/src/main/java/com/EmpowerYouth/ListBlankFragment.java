@@ -67,15 +67,15 @@ public class ListBlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_blank, container, false);
-         Control control = new Control(getActivity());
+        Control control = new Control(getActivity());
         ArrayList<Model> list;
 
-//         list=control.maincontrol();
-        final LinkedList<String> videoLinkList = new LinkedList<>();
-        for (int i = 0; i < 6; i++) {
-  //          Log.d("this_is_me",list.get(i).getVideo_title());
-            videoLinkList.addLast("Word " + i);
-        }
+////         list=control.maincontrol();
+//        final LinkedList<String> videoLinkList = new LinkedList<>();
+//        for (int i = 0; i < 6; i++) {
+//            //          Log.d("this_is_me",list.get(i).getVideo_title());
+//            videoLinkList.addLast("Word " + i);
+//        }
 
 //        TextView textView = view.findViewById(R.id.youtube_link);
 //        textView.setText(youtubeVideoLink);
@@ -85,18 +85,20 @@ public class ListBlankFragment extends Fragment {
 
         youtubeVideosRV.setLayoutManager(new LinearLayoutManager(getContext()));
         youtubeVideosRV.setAdapter(youtubeVideosAdapter);
-      final Control control1 = new Control(getActivity());
-      control1.vid_list(new VolleyCallback() {
-          @Override
-          public void onSuccess() {
-              YoutubeListAdapter list = new YoutubeListAdapter(getContext(),control1.list);
-          }
+        final Control control1 = new Control(getActivity());
+        control1.vid_list(new VolleyCallback() {
+            @Override
+            public void onSuccess() {
+                YoutubeListAdapter list = new YoutubeListAdapter(getContext(), control1.list);
+                youtubeVideosRV.setAdapter(list);
+                list.notifyDataSetChanged();
+            }
 
-          @Override
-          public void onError(TYPE type, Map<String, String> errorList) {
+            @Override
+            public void onError(TYPE type, Map<String, String> errorList) {
 
-          }
-      });
+            }
+        });
         return view;
     }
 

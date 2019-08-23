@@ -1,25 +1,28 @@
 package com.EmpowerYouth.adapter;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+        import android.content.Context;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+        import androidx.annotation.NonNull;
+        import androidx.recyclerview.widget.RecyclerView;
 
-import com.EmpowerYouth.Control;
-import com.EmpowerYouth.Model;
-import com.EmpowerYouth.R;
+        import com.EmpowerYouth.Control;
+        import com.EmpowerYouth.Model;
+        import com.EmpowerYouth.R;
+        import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+        import java.util.ArrayList;
+        import java.util.LinkedList;
 
 public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.YoutubeListViewHolder> {
 
-    private LinkedList<String> youtubeVidList= new LinkedList<>();
+    private ArrayList<String> youtubeVidList= new ArrayList<>();
+    private ArrayList<String> youtubeImgLink= new ArrayList<>();
     private LayoutInflater layoutInflater;
 
 
@@ -27,24 +30,31 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     public YoutubeListAdapter(Context context,
                               ArrayList<Model> videoLinkList) {
         this.videoLinkList=videoLinkList;
+        Log.d("hiiiiiiiiiiiiiiiii",Integer.valueOf(videoLinkList.size()).toString());
+        for(int i=0;i<videoLinkList.size();i++){
+            youtubeVidList.add(videoLinkList.get(i).getVideo_title());
+
+        }
+        for(int i=0;i<videoLinkList.size();i++){
+            youtubeImgLink.add(videoLinkList.get(i).getImage_link());
+
+        }
+//
     }
 
     @NonNull
     @Override
     public YoutubeListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.youtube_item, parent, false);
-        return new YoutubeListViewHolder(itemView, this);
+        return new YoutubeListViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull YoutubeListViewHolder holder, int position) {
-        String current = youtubeVidList.get(position);
-        Log.d("YOUTUBE_LIST_ADAPTER", "here ");
-//        if(current != null){
-        for(String s : youtubeVidList){
-            Log.d("YOUTUBE_LIST_ADAPTER", "dis "+ s);
-        }
 
+        String current = youtubeVidList.get(position);
+        String imageLink = youtubeImgLink.get(position);
+        Picasso.get().load(imageLink).into(holder.imageView);
         holder.title.setText(current);
 //        }
     }
@@ -56,12 +66,12 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
 
     class YoutubeListViewHolder extends RecyclerView.ViewHolder{
         final TextView title;
-        final YoutubeListAdapter adapter;
+        ImageView imageView;
 
-        YoutubeListViewHolder(View itemView, YoutubeListAdapter listAdapter){
+        YoutubeListViewHolder(View itemView){
             super(itemView);
             title = itemView.findViewById(R.id.youtube_link);
-            adapter = listAdapter;
+            imageView = itemView.findViewById(R.id.imageView2);
         }
     }
 }
