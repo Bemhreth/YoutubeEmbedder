@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,7 +94,12 @@ public class ListBlankFragment extends Fragment {
                     @Override
                     public void onClick(View view, int position) {
                         // play the video given the position ... control1.list[position]
-                        Log.e("CLICKED" , "Video ID : " + control1.list.get(position));
+                        Log.e("CLICKED" , "Video ID : " + control1.list.get(position).getVideoID());
+
+                        // now change the video by calling the method inside the upper activity
+                        if (getActivity() != null) {
+                            ((MainActivity) getActivity()).changeTheVideoBeingPlayed(control1.list.get(position).getVideoID());
+                        }
                     }
                 };
 

@@ -60,6 +60,7 @@ public class Control {
                     model=new Model();
                     JSONArray object = new JSONObject(response).getJSONArray("items");
 
+                    model.setVideoID(object.getJSONObject(0).getJSONObject("id").getString("videoId"));
                     model.setViewed(object.getJSONObject(0).getJSONObject("statistics").getString("viewCount"));
                     Log.d("object things",object.getJSONObject(0).getJSONObject("statistics").getString("viewCount"));
                     model.setDislikes(object.getJSONObject(0).getJSONObject("statistics").getString("dislikeCount"));
@@ -79,6 +80,7 @@ public class Control {
                     Map<String, String> errorList = new HashMap<>();
                     errorList.put("message", "Error Parsing Response contact developer");
                     callback.onError(VolleyCallback.TYPE.JSON_ERROR,errorList);
+                    e.printStackTrace();    // print this
                 }
             }
         },new Response.ErrorListener() {
@@ -115,7 +117,7 @@ public ArrayList<Model> vid_list(final VolleyCallback callback){
                     model=new Model();
 
                    model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
-
+                    model.setVideoID(object.getJSONObject(i).getJSONObject("id").getString("videoId"));
                     model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
 
                     Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
@@ -131,7 +133,7 @@ for (int i =0;i<list.size();i++){
             } catch (JSONException e) {
                 Map<String, String> errorList = new HashMap<>();
                 errorList.put("message", "Error Parsing Response contact developer");
-
+                e.printStackTrace();    // print this
             }
         }
     },new Response.ErrorListener() {

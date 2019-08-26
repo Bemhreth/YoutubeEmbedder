@@ -30,12 +30,21 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private YouTubePlayerView playerView;
+    private YouTubePlayer youtubePlayer;
     private static final String TAG = "IFramePreview";
     Control control1 = new Control(this);
 
-
-
-
+    // we are going to call this from within the fragment to change the video being played
+    //    MAINACTIVITY <---------
+    //         |                |
+    //         |              changeTheVideoBeingPlayed(videoId)
+    //         |                |
+    //         |                |
+    //         |                |
+    //    ListBlankFragment -----
+    public void changeTheVideoBeingPlayed(String videoId) {
+        if (youtubePlayer != null) youtubePlayer.loadVideo(videoId , 0f);
+    }
 
     /** Fullscreen functionality **/
 
@@ -106,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
+                MainActivity.this.youtubePlayer = youTubePlayer;
                 String videoId = YoutubeConfig.getLink();
                 Toast.makeText(MainActivity.this, "heyyyyyyyyyyyyyyyyyyyyyyyyyyyy", Toast.LENGTH_SHORT).show();
                 youTubePlayer.loadVideo(videoId, 0);
