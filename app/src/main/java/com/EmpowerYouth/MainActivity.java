@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
@@ -48,9 +49,10 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
     TextView t1;
     TextView t2;
     TextView t3;
-
     TextView t4;
+    TextView descriptionTV;
     YouTubePlayerView youTubePlayerView;
+    Control control;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,8 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
         t2 = findViewById(R.id.textView6);
         t3 = findViewById(R.id.textView7);
         t4 = findViewById(R.id.textView);
-        final Control control = new Control(this);
+        descriptionTV = findViewById(R.id.description_tv);
+        control = new Control(this);
         //control.setContext2(this);
 
 
@@ -98,17 +101,10 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
             public void onApiChange(YouTubePlayer youTubePlayer) {
 
             }
-//            public void initial(YouTubePlayer youTubePlayer){
-//                String videoId = "qkSBmRAVXNc";
-//                youTubePlayer.loadVideo(videoId, 0);
-//
-//
-//            }
-
 
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                youTubePlayer.loadVideo(YoutubeConfig.getLink(), 0);
+//                youTubePlayer.loadVideo(YoutubeConfig.getLink(), 0);
 
             }
             @Override
@@ -154,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
 
 //
         });
-
+        playVideo(YoutubeConfig.getLink());
 
         displayFragment(YoutubeConfig.getLink());
 
@@ -198,15 +194,9 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
                 .commit();
 
     }
-//    public void initial(YouTubePlayer youTubePlayer){
-////                String videoId = "qkSBmRAVXNc";
-////                youTubePlayer.loadVideo(videoId, 0);
-////
-////
-////        youTubePlayer
-//            }
 
     public void onItemClickListener(String videoLink){
+        YoutubeConfig.setLink(videoLink);
         playVideo(videoLink);
     }
 
@@ -215,7 +205,37 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
             @Override
             public void onYouTubePlayer(YouTubePlayer youTubePlayer) {
                 youTubePlayer.loadVideo(videoLink, 0);
+                displayFragment(videoLink);
 
+            }
+        });
+
+        control.maincontrol(new VolleyCallback() {
+            @Override
+            public void onSuccess() {
+                t1.setText(control.model.getViewed());
+                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getLikes());
+                t2.setText(control.model.getLikes());
+                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getDislikes());
+                t3.setText(control.model.getDislikes());
+                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getTitle());
+                t4.setText(control.model.getTitle());
+                t4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(descriptionTV.getVisibility() == View.VISIBLE){
+                            descriptionTV.setVisibility(View.GONE);
+                        }
+                        else descriptionTV.setVisibility(View.VISIBLE);
+                    }
+                });
+                descriptionTV.setText(control.model.getDescription());
+//                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getDescription());
+            }
+
+            @Override
+            public void onError(TYPE type, Map<String, String> errorList) {
+                Log.d("MAIN_ACTIVITY", "ERROR ON VOLLEY REQUEST: " + type.name());
             }
         });
 

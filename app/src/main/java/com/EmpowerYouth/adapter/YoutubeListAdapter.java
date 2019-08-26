@@ -23,23 +23,20 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     private ArrayList<String> youtubeImgLink= new ArrayList<>();
     private ArrayList<String> youtubeVideoLinkList = new ArrayList<>();
     private LayoutInflater layoutInflater;
-    private Context context;
     public OnFragmentInteractionListener listener;
 
     ArrayList<Model> videoLinkList;
     public YoutubeListAdapter(Context context,
                               ArrayList<Model> videoLinkList,
                               OnFragmentInteractionListener listener) {
-        this.context = context;
+//        Context context1 = context;
         this.videoLinkList=videoLinkList;
         this.listener = listener;
-        Log.d("hiiiiiiiiiiiiiiiii",Integer.valueOf(videoLinkList.size()).toString());
         for(int i=0;i<videoLinkList.size();i++){
             youtubeVidList.add(videoLinkList.get(i).getVideo_title());
             youtubeImgLink.add(videoLinkList.get(i).getImage_link());
             youtubeVideoLinkList.add(videoLinkList.get(i).getVideo_link());
         }
-//
     }
 
     @NonNull
