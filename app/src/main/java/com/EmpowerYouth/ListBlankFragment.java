@@ -67,7 +67,7 @@ public class ListBlankFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_blank, container, false);
-        Control control = new Control(getActivity());
+        final Control control = new Control(getActivity());
         ArrayList<Model> list;
 
 ////         list=control.maincontrol();
@@ -89,7 +89,15 @@ public class ListBlankFragment extends Fragment {
         control1.vid_list(new VolleyCallback() {
             @Override
             public void onSuccess() {
-                YoutubeListAdapter list = new YoutubeListAdapter(getContext(), control1.list);
+                YoutubeListAdapter.OnClickListener onClickListener = new YoutubeListAdapter.OnClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        // play the video given the position ... control1.list[position]
+                        Log.e("CLICKED" , "Video ID : " + control1.list.get(position));
+                    }
+                };
+
+                YoutubeListAdapter list = new YoutubeListAdapter(getContext(), control1.list , onClickListener);
                 youtubeVideosRV.setAdapter(list);
                 list.notifyDataSetChanged();
             }

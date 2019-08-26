@@ -27,12 +27,19 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     private LayoutInflater layoutInflater;
     private Context context;
 
+    public interface OnClickListener {
+        void onClick(View view , int position);
+    }
+
+    private OnClickListener onClickListener;
+
     ArrayList<Model>   videoLinkList;
     public YoutubeListAdapter(Context context,
-                              ArrayList<Model> videoLinkList) {
+                              ArrayList<Model> videoLinkList, OnClickListener onClickListener) {
         this.context = context;
         this.videoLinkList=videoLinkList;
-        Log.d("hiiiiiiiiiiiiiiiii",Integer.valueOf(videoLinkList.size()).toString());
+        this.onClickListener = onClickListener;     // setting up an interface to listen to clicks
+        Log.d("hiiiiiiiiiiiiiiiii",Integer.valueOf(videoLinkList.size()).toString());   // it's better to use breakpoints in android studio than to log tho :)
         for(int i=0;i<videoLinkList.size();i++){
             youtubeVidList.add(videoLinkList.get(i).getVideo_title());
 
@@ -52,7 +59,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull YoutubeListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final YoutubeListViewHolder holder, int position) {
 
         final String current = youtubeVidList.get(position);
         String imageLink = youtubeImgLink.get(position);
@@ -62,6 +69,13 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onClickListener != null) onClickListener.onClick(v , holder.getAdapterPosition());
             }
         });
 //        }
