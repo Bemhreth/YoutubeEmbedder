@@ -50,7 +50,8 @@ public class Control {
         request1 = Volley.newRequestQueue(context);
 
 
-            StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
+
+        StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -113,8 +114,8 @@ public ArrayList<Model> vid_list(final VolleyCallback callback){
                     model=new Model();
 
                    model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
-                    model.setVideo_link(object.getJSONObject(i).getJSONObject("id").getString("videoId"));
-                    model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
+                   model.setVideo_link(object.getJSONObject(i).getJSONObject("id").getString("videoId"));
+                   model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
 
                     Log.d("CONTROL_TAG" ,"VID_LIST: " + model.getVideo_link());
                     list.add(i,model);
@@ -129,7 +130,7 @@ for (int i =0;i<list.size();i++){
             } catch (JSONException e) {
                 Map<String, String> errorList = new HashMap<>();
                 errorList.put("message", "Error Parsing Response contact developer");
-
+                e.printStackTrace();    // print this
             }
         }
     },new Response.ErrorListener() {

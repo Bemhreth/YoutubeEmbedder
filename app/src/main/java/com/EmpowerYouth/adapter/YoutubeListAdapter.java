@@ -39,11 +39,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
             youtubeImgLink.add(videoLinkList.get(i).getImage_link());
             youtubeVideoLinkList.add(videoLinkList.get(i).getVideo_link());
         }
-
-//        for(int i=0;i<videoLinkList.size();i++){
-//        }
 //
-//        for(int i = 0;i < videoLinkList.size();i++){
     }
 
     @NonNull

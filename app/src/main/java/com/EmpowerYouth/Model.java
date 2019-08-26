@@ -1,6 +1,9 @@
 package com.EmpowerYouth;
 
 public class Model {
+    // VIDEO ID WAS THE CRUCIAL PART
+
+    private String videoID;
     private String viewed;
     private String title;
     private String description;
@@ -18,6 +21,14 @@ public class Model {
         Video_link = video_link;
     }
 
+
+    public String getVideoID() {
+        return videoID;
+    }
+
+    public void setVideoID(String videoID) {
+        this.videoID = videoID;
+    }
 
     public String getTitle() {
         return title;
