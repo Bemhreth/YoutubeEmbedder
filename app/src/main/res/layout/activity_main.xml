@@ -41,7 +41,7 @@
             app:showVideoDuration="true"
             app:showYouTubeButton="true"
 
-            app:videoId="qkSBmRAVXNc"
+            app:videoId=""
             tools:ignore="MissingConstraints" />
 
         <TextView

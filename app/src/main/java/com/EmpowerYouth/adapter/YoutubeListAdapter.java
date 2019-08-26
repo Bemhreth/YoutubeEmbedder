@@ -7,6 +7,7 @@ package com.EmpowerYouth.adapter;
         import android.view.ViewGroup;
         import android.widget.ImageView;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import androidx.annotation.NonNull;
         import androidx.recyclerview.widget.RecyclerView;
@@ -24,11 +25,12 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     private ArrayList<String> youtubeVidList= new ArrayList<>();
     private ArrayList<String> youtubeImgLink= new ArrayList<>();
     private LayoutInflater layoutInflater;
-
+    private Context context;
 
     ArrayList<Model>   videoLinkList;
     public YoutubeListAdapter(Context context,
                               ArrayList<Model> videoLinkList) {
+        this.context = context;
         this.videoLinkList=videoLinkList;
         Log.d("hiiiiiiiiiiiiiiiii",Integer.valueOf(videoLinkList.size()).toString());
         for(int i=0;i<videoLinkList.size();i++){
@@ -52,10 +54,16 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
     @Override
     public void onBindViewHolder(@NonNull YoutubeListViewHolder holder, int position) {
 
-        String current = youtubeVidList.get(position);
+        final String current = youtubeVidList.get(position);
         String imageLink = youtubeImgLink.get(position);
         Picasso.get().load(imageLink).into(holder.imageView);
         holder.title.setText(current);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 //        }
     }
 
@@ -72,6 +80,7 @@ public class YoutubeListAdapter extends RecyclerView.Adapter<YoutubeListAdapter.
             super(itemView);
             title = itemView.findViewById(R.id.youtube_link);
             imageView = itemView.findViewById(R.id.imageView2);
+
         }
     }
 }

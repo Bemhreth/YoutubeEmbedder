@@ -14,10 +14,11 @@ public class YoutubeConfig {
     public static String getLink() {
         return link;
     }
-    String videoId="qkSBmRAVXNc";
-    static final String link="qkSBmRAVXNc";
+    String chanelId="UCXgGY0wkgOzynnHvSEVmE3A";
+    String videoId="SdH4QdyHn18";
+    static final String link="SdH4QdyHn18";
     String API="https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&part=snippet,contentDetails,statistics,status";
-    String API1="https://www.googleapis.com/youtube/v3/search?key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&channelId=UCXgGY0wkgOzynnHvSEVmE3A&part=snippet,id&order=date&maxResults=20";
+    String API1="https://www.googleapis.com/youtube/v3/search?key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&channelId="+chanelId+"&part=snippet,id&order=date&maxResults=20";
 
 }
 

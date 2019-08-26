@@ -96,15 +96,19 @@ public class MainActivity extends AppCompatActivity {
             public void onApiChange(YouTubePlayer youTubePlayer) {
 
             }
-            public void initial(YouTubePlayer youTubePlayer){
-                String videoId = "qkSBmRAVXNc";
-                youTubePlayer.loadVideo(videoId, 0);
+//            public void initial(YouTubePlayer youTubePlayer){
+//                String videoId = "qkSBmRAVXNc";
+//                youTubePlayer.loadVideo(videoId, 0);
+//
+//
+//            }
 
 
-            }
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                initial(youTubePlayer);
+                String videoId = YoutubeConfig.getLink();
+                Toast.makeText(MainActivity.this, "heyyyyyyyyyyyyyyyyyyyyyyyyyyyy", Toast.LENGTH_SHORT).show();
+                youTubePlayer.loadVideo(videoId, 0);
 
             }
             @Override
