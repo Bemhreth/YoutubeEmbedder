@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 //import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
@@ -27,7 +28,7 @@ import java.util.Map;
 //import com.google.android.youtube.player.YouTubePlayerView;
 //import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListBlankFragment.OnFragmentInteractionListener {
 
     private YouTubePlayerView playerView;
     private static final String TAG = "IFramePreview";
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     TextView t3;
 
     TextView t4;
+    YouTubePlayerView youTubePlayerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        youTubePlayerView = findViewById(R.id.youtube_player_view);
         I2 = findViewById(R.id.imageView6);
         I1 = findViewById(R.id.imageView5);
         I3 = findViewById(R.id.imageView7);
@@ -106,9 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onReady(YouTubePlayer youTubePlayer) {
-                String videoId = YoutubeConfig.getLink();
-                Toast.makeText(MainActivity.this, "heyyyyyyyyyyyyyyyyyyyyyyyyyyyy", Toast.LENGTH_SHORT).show();
-                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.loadVideo(YoutubeConfig.getLink(), 0);
 
             }
             @Override
@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
 //
         });
 
+
         displayFragment(YoutubeConfig.getLink());
 
 
@@ -195,6 +196,28 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.youtubeListContainer, listBlankFragment)
                 .addToBackStack(null)
                 .commit();
+
+    }
+//    public void initial(YouTubePlayer youTubePlayer){
+////                String videoId = "qkSBmRAVXNc";
+////                youTubePlayer.loadVideo(videoId, 0);
+////
+////
+////        youTubePlayer
+//            }
+
+    public void onItemClickListener(String videoLink){
+        playVideo(videoLink);
+    }
+
+    public void playVideo(final String videoLink){
+        youTubePlayerView.getYouTubePlayerWhenReady(new YouTubePlayerCallback() {
+            @Override
+            public void onYouTubePlayer(YouTubePlayer youTubePlayer) {
+                youTubePlayer.loadVideo(videoLink, 0);
+
+            }
+        });
 
     }
 

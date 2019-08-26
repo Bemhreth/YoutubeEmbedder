@@ -8,6 +8,16 @@ public class Model {
     private String dislikes;
     private String Image_link;
     private String Video_title;
+    private String Video_link;
+
+    public String getVideo_link() {
+        return Video_link;
+    }
+
+    public void setVideo_link(String video_link) {
+        Video_link = video_link;
+    }
+
 
     public String getTitle() {
         return title;

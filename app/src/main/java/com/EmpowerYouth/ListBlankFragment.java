@@ -89,7 +89,7 @@ public class ListBlankFragment extends Fragment {
         control1.vid_list(new VolleyCallback() {
             @Override
             public void onSuccess() {
-                YoutubeListAdapter list = new YoutubeListAdapter(getContext(), control1.list);
+                YoutubeListAdapter list = new YoutubeListAdapter(getContext(), control1.list, mListener);
                 youtubeVideosRV.setAdapter(list);
                 list.notifyDataSetChanged();
             }
@@ -102,10 +102,16 @@ public class ListBlankFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+//    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onItemClickListener(uri);
+//        }
+//    }
+
+    public void onItemClicked(String videoLink){
+        if(mListener != null){
+            mListener.onItemClickListener(videoLink);
         }
     }
 
@@ -123,29 +129,10 @@ public class ListBlankFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+//        // TODO: Update argument type and name
+//        void onFragmentInteraction(Uri uri);
+
+        void onItemClickListener(String videoLink);
     }
 }
-
-
-//public void displayFragment(){
-//        ListBlankFragment listBlankFragment = ListBlankFragment.newInstance("alskdfjakl");
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.add(R.id.youtubeListContainer, listBlankFragment)
-//                .addToBackStack(null)
-//                .commit();
-//
-//    }

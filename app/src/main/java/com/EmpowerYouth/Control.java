@@ -50,9 +50,7 @@ public class Control {
         request1 = Volley.newRequestQueue(context);
 
 
-
-        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+context);
-        StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(StringRequest.Method.GET, youtubeconfig.API , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -69,9 +67,7 @@ public class Control {
                     model.setTitle(object.getJSONObject(0).getJSONObject("snippet").getString("title"));
 
                     model.setDescription(object.getJSONObject(0).getJSONObject("snippet").getString("description"));
-                    Toast.makeText(context,model.getTitle(),Toast.LENGTH_LONG).show();
-
-
+                    model.setVideo_link(object.getJSONObject(0).getString("id"));
 
                     callback.onSuccess();
 
@@ -79,6 +75,8 @@ public class Control {
                     Map<String, String> errorList = new HashMap<>();
                     errorList.put("message", "Error Parsing Response contact developer");
                     callback.onError(VolleyCallback.TYPE.JSON_ERROR,errorList);
+
+                    Log.d("CONTROL_TAG", "MAIN_CONTROL_ERROR - "+e.getMessage());
                 }
             }
         },new Response.ErrorListener() {
@@ -115,10 +113,10 @@ public ArrayList<Model> vid_list(final VolleyCallback callback){
                     model=new Model();
 
                    model.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
-
+                    model.setVideo_link(object.getJSONObject(i).getJSONObject("id").getString("videoId"));
                     model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
 
-                    Log.d("this_is_unuque_because:" ,"-->"+model.getVideo_title());
+                    Log.d("CONTROL_TAG" ,"VID_LIST: " + model.getVideo_link());
                     list.add(i,model);
                 }
 for (int i =0;i<list.size();i++){
