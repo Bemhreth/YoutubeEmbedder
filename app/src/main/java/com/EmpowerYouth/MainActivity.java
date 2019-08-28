@@ -29,6 +29,8 @@ import java.util.Map;
 //import com.google.android.youtube.player.YouTubePlayerView;
 //import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
+import com.google.api
+
 public class MainActivity extends AppCompatActivity implements ListBlankFragment.OnFragmentInteractionListener {
 
     private YouTubePlayerView playerView;
@@ -246,9 +248,7 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
                 Log.d("MAIN_ACTIVITY", "ERROR ON VOLLEY REQUEST: " + type.name());
             }
         });
-
     }
-
 }
 
 

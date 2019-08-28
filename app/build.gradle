@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.apis:google-api-services-youtube:v3-rev181-1.22.0'
 }
