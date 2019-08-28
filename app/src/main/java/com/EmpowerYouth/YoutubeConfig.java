@@ -9,7 +9,7 @@ public class YoutubeConfig {
         return id;
     }
 
-    //private static final String id="AIzaSyBpLXOALntQ6FN3JbXRMLVyQTlcCsW4zbE";
+
 
     static String getLink() {
         return link;
