@@ -24,6 +24,6 @@ public class YoutubeConfig {
     private static String link="SdH4QdyHn18";
     String API="https://www.googleapis.com/youtube/v3/videos?id="+link+"&key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&part=snippet,contentDetails,statistics,status";
     String API1="https://www.googleapis.com/youtube/v3/search?key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&channelId="+chanelId+"&part=snippet,id&order=date&maxResults=20";
-    String API_COMMENTS = "https://www.googleapis.com/youtube/v3/comments?id="+link+"&key=AIzaSyBU4sPMEdeK0FMa16Y1dAok5uIhhnDMpx0&part=snippet,contentDetails,statistics,status"
+    String API_COMMENTS = "https://www.googleapis.com/youtube/v3/commentThreads?key="+id+"&textFormat=plainText&part=snippet&videoId="+link+"&maxResults=50";
 }
 

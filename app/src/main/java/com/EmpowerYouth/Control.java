@@ -2,13 +2,7 @@ package com.EmpowerYouth;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.EmpowerYouth.adapter.YoutubeListAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,6 +23,8 @@ public class Control {
 
      Model model;
     ArrayList<Model> list=new ArrayList<>();
+
+    ArrayList<Comment> commentsList=new ArrayList<>();
 
     public Control(Context context) {
         this.context = context;
@@ -87,28 +83,19 @@ public class Control {
             }
         }) {
 
-
-
-
         };
 
         request1.add(stringRequest);
-
-
 }
 public ArrayList<Model> vid_list(final VolleyCallback callback){
         RequestQueue request2;
 
-    Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+context);
     request2 = Volley.newRequestQueue(context);
-    Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+request2);
     StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API1, new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
 
             try {
-
-
                 JSONArray object = new JSONObject(response).getJSONArray("items");
                 for(int i=0 ;i<object.length();i++) {
                     model=new Model();
@@ -124,8 +111,6 @@ for (int i =0;i<list.size();i++){
     Log.d("listt",list.get(i).getVideo_title()+"\n"+list.get(i).getImage_link());
 }
                 callback.onSuccess();
-                Toast.makeText(context, model.getTitle(), Toast.LENGTH_LONG).show();
-
 
             } catch (JSONException e) {
                 Map<String, String> errorList = new HashMap<>();
@@ -140,19 +125,68 @@ for (int i =0;i<list.size();i++){
         }
     }) {
 
-
-
-
     };
 
     request2.add(stringRequest2);
 
-
-//        ListBlankFragment fragment1 = new ListBlankFragment();
-//        fragment1.setList1(list);
-//        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
     return list;
 }
+
+
+    public ArrayList<Comment> comments_list(final VolleyCallback callback){
+        RequestQueue request2;
+        request2 = Volley.newRequestQueue(context);
+        StringRequest stringRequest2 = new StringRequest(StringRequest.Method.GET, youtubeconfig.API_COMMENTS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONArray object = new JSONObject(response).getJSONArray("items");
+                    Comment comment = new Comment();
+                    Log.d("COMMENTS_ACTIVITY", "Number - "+object.length());
+                    for(int i=0 ;i<object.length();i++) {
+                        JSONObject snippet = object.getJSONObject(i).getJSONObject("snippet").getJSONObject("topLevelComment").getJSONObject("snippet");
+//                        Log.d("COMMENTS_ACTIVITY", "Item - "+snippet.toString());
+                        comment = new Comment();
+                        comment.setComment(snippet.getString("textDisplay"));
+                        comment.setCommentId(object.getJSONObject(i).getString("id"));
+                        comment.setLikeCount(snippet.getString("likeCount"));
+                        comment.setPublishedAt(snippet.getString("publishedAt"));
+                        comment.setVideoId(snippet.getString("videoId"));
+                        comment.setAuthor(snippet.getString("authorDisplayName"));
+//                        comment.setVideo_title(object.getJSONObject(i).getJSONObject("snippet").getString("title"));
+//                        model.setVideo_link(object.getJSONObject(i).getJSONObject("id").getString("videoId"));
+//                        model.setImage_link(object.getJSONObject(i).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url"));
+
+//                        Log.d("CONTROL_TAG" ,"VID_LIST: " + model.getVideo_link());
+                        commentsList.add(i,comment);
+                    }
+//                    for (int i =0;i<commentsList.size();i++){
+//                        Log.d("listt",commentsList.get(i).getComment()+"\n"+list.get(i).getImage_link());
+//                    }
+                    callback.onSuccess();
+
+                } catch (JSONException e) {
+                    Map<String, String> errorList = new HashMap<>();
+                    errorList.put("message", "Error Parsing Response contact developer");
+                    e.printStackTrace();    // print this
+                }
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//
+            }
+        }) {
+
+        };
+
+        request2.add(stringRequest2);
+
+        return commentsList;
+    }
+
+
 
 }
 

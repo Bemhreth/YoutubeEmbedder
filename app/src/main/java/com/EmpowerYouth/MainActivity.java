@@ -1,7 +1,6 @@
 package com.EmpowerYouth;
 
-import com.EmpowerYouth.*;
-import android.app.Dialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,17 +28,12 @@ import java.util.Map;
 //import com.google.android.youtube.player.YouTubePlayerView;
 //import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
-import com.google.api
 
 public class MainActivity extends AppCompatActivity implements ListBlankFragment.OnFragmentInteractionListener {
 
     private YouTubePlayerView playerView;
     private static final String TAG = "IFramePreview";
     Control control1 = new Control(this);
-
-
-
-
 
     /** Fullscreen functionality **/
 
@@ -55,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
     TextView descriptionTV;
     YouTubePlayerView youTubePlayerView;
     Control control;
+    Button commentsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +70,16 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
         t4 = findViewById(R.id.textView);
         descriptionTV = findViewById(R.id.description_tv);
         control = new Control(this);
+        commentsButton = findViewById(R.id.comments_button);
+        commentsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CommentsActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         //control.setContext2(this);
 
 
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Toast.makeText(this, "it is getting destroyed", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "it is getting destroyed", Toast.LENGTH_LONG).show();
         // moreVideosRecycler = null;
         // moreVideoAdapter = null;
     }
@@ -216,11 +221,11 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
             @Override
             public void onSuccess() {
                 t1.setText(control.model.getViewed());
-                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getLikes());
+//                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getLikes());
                 t2.setText(control.model.getLikes());
-                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getDislikes());
+//                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getDislikes());
                 t3.setText(control.model.getDislikes());
-                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getTitle());
+//                Log.d("MAIN_ACTIVITY:" ,"-->"+control.model.getTitle());
                 t4.setText(control.model.getTitle());
                 t4.setOnClickListener(new View.OnClickListener() {
                     @Override
