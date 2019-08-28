@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
     ImageView I1;
     ImageView I2;
     ImageView I3;
+    ImageView I4;
+    ImageView I5;
     TextView t1;
     TextView t2;
     TextView t3;
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
         t2 = findViewById(R.id.textView6);
         t3 = findViewById(R.id.textView7);
         t4 = findViewById(R.id.textView);
+        I4 = findViewById(R.id.imageView8);
+
         descriptionTV = findViewById(R.id.description_tv);
         control = new Control(this);
         //control.setContext2(this);
@@ -225,8 +229,12 @@ public class MainActivity extends AppCompatActivity implements ListBlankFragment
                     public void onClick(View view) {
                         if(descriptionTV.getVisibility() == View.VISIBLE){
                             descriptionTV.setVisibility(View.GONE);
+                            I4.setImageResource(R.drawable.ic_downarrow);
                         }
-                        else descriptionTV.setVisibility(View.VISIBLE);
+                        else {
+                            descriptionTV.setVisibility(View.VISIBLE);
+                            I4.setImageResource(R.drawable.ic_uparrow);
+                        }
                     }
                 });
                 descriptionTV.setText(control.model.getDescription());

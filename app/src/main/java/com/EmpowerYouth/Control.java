@@ -2,13 +2,8 @@ package com.EmpowerYouth;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.EmpowerYouth.adapter.YoutubeListAdapter;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -136,7 +131,7 @@ for (int i =0;i<list.size();i++){
     },new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-//
+
         }
     }) {
 
@@ -148,9 +143,6 @@ for (int i =0;i<list.size();i++){
     request2.add(stringRequest2);
 
 
-//        ListBlankFragment fragment1 = new ListBlankFragment();
-//        fragment1.setList1(list);
-//        Log.d("heyyyyyyyyyyyyyyy","askldfjalks "+this.getContext());
     return list;
 }
 
