@@ -8,16 +8,16 @@
     tools:context=".MainActivity" android:id="@+id/activity_main">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:ignore="MissingConstraints"
         android:id="@+id/linearLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
         <!--<com.google.android.youtube.player.YouTubePlayerView-->
         <!--android:id="@+id/youtube_player_view"-->
         <!--android:layout_width="match_parent"-->
@@ -29,17 +29,17 @@
 
             android:layout_weight="1"
             app:autoPlay="true"
+            app:enableAutomaticInitialization="true"
+            app:handleNetworkEvents="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:showFullScreenButton="true"
-            app:enableAutomaticInitialization="true"
-            app:useWebUi="true"
-            app:handleNetworkEvents="true"
             app:showSeekBar="true"
             app:showVideoCurrentTime="true"
             app:showVideoDuration="true"
             app:showYouTubeButton="true"
+            app:useWebUi="true"
 
             app:videoId="SdH4QdyHn18"
             tools:ignore="MissingConstraints" />
@@ -127,35 +127,40 @@
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_uparrow" />
 
-            </LinearLayout>
-
                 <Button
                     android:id="@+id/comments_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Comments" />
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/description_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Description"
-                android:textSize="18sp"
-                android:visibility="gone" />
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/youtubeListContainer"
+        <TextView
+            android:id="@+id/description_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-        </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Description"
+            android:textSize="18sp"
+            android:visibility="gone" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/youtubeListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+    </FrameLayout>
+
+    <!--</LinearLayout>-->
 
 
 
